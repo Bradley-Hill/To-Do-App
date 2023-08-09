@@ -28,17 +28,17 @@ module.exports = {
       },
       {
         test: /.*\.(png|jpg|jpeg|gif|svg)$/,
-        loader: 'file-loader',
-        // use: [
-        //   {
-        //     loader: 'url-loader',
-        //     options: {
-        //       limit: 8192,
-        //       name: 'images/[name].[ext]', 
+        ltype: 'asset/resource',
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'images/[name].[ext]', 
             
-        //     },
-        //   },
-        // ],
+            },
+          },
+        ],
       },
     ],
   },
