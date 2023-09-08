@@ -24,4 +24,4 @@ type ToDoItem = {
     return toDoItem;
   }
 
-  export {createToDoItem}
+  export {createToDoItem, ToDoItem}
