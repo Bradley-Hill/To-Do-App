@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: './src/main.js',
   output: {
-    filename: 'index.js',
+    filename: './index.js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
@@ -33,7 +33,7 @@ module.exports = {
       },
       {
         test: /.*\.(png|jpg|jpeg|gif|svg)$/,
-        ltype: 'asset/resource',
+        type: 'asset/resource',
         use: [
           {
             loader: 'url-loader',
