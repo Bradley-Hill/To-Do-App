@@ -13,7 +13,7 @@ function addToDoItemToUI(toDoItem: ToDoItem){
     <strong>Is Completed:</strong> ${toDoItem.isCompleted ? 'Yes' : 'No'}
     `
 
-    ul.appendChild(li);
+    ul?.appendChild(li);
   }
 
   export {addToDoItemToUI}
