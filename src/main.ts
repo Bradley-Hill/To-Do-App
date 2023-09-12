@@ -9,16 +9,16 @@ import { addToDoItemToUI } from './addToDoItemToUI';
 document.addEventListener("DOMContentLoaded", function () {
   
   //Declare variables from the form inputs
-  const form = document.querySelector('form') as HTMLFormElement;
+  //const form = document.querySelector('form') as HTMLFormElement;
   const taskInput = document.querySelector('input[name="task"]') as HTMLInputElement;
   const descriptionInput = document.querySelector('input[name="description"]') as HTMLInputElement;
   const priorityInput = document.querySelector('input[name="priority"]')as HTMLInputElement;
   const dueDateInput = document.querySelector('input[name="dueDate"]')as HTMLInputElement;
-  // const buttonInput = document.querySelector('#toDoBttn')
+  const buttonInput = document.querySelector('#toDoBttn')
 
   //Listen for the form button being clicked and create instance of toDoItem using
   //form input values
-  form?.addEventListener('submit', function(event){
+  buttonInput?.addEventListener('click', function(event){
     event.preventDefault()
 
     const task = taskInput?.value;
