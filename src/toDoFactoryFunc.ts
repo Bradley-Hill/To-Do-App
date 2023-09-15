@@ -9,7 +9,8 @@ type ToDoItem = {
     markComplete: () => void;
   };
 
-  type ToDoItemArray = ToDoItem[];
+  //Perhaps not necessary??
+  // type ToDoItemArray = ToDoItem[];
 
   function createToDoItem(task: string,priority: number,dueDate: Date,description: string)
   : ToDoItem {
@@ -26,4 +27,4 @@ type ToDoItem = {
     return toDoItem;
   }
 
-  export {createToDoItem, ToDoItem, ToDoItemArray}
+  export {createToDoItem, ToDoItem, }

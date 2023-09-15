@@ -1,10 +1,15 @@
 import { Project } from "./projectFunctions";
-import { ToDoItemArray } from "./toDoFactoryFunc";
+
 
 //Local Storage set/get functions for persistent projects between users.
 
-function saveDataToLocalStorage(name: string, data: ToDoItemArray){
-    localStorage.setItem(name, JSON.stringify(data));
+type ProjectData = Project;
+
+
+function saveDataToLocalStorage(name: string | undefined, data: ProjectData | undefined) {
+    if (name !== undefined && data !== undefined) {
+        localStorage.setItem(name, JSON.stringify(data));
+    }
 }
 
 function getDataFromLocalStorage(){

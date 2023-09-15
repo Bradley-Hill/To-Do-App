@@ -1,5 +1,5 @@
 import { ToDoItem } from "./toDoFactoryFunc";
-import { saveDataToLocalStorage, getDataFromLocalStorage } from "./localStorageFunctions";
+import { saveDataToLocalStorage,  } from "./localStorageFunctions";
 
 // Define a type for the Project Object
 type Project = {
@@ -34,7 +34,9 @@ type Project = {
     const project = projects.find((p)=> p.name === projectName)
     if(projectName){
         project?.toDoItems.push(toDoItem)
-        saveDataToLocalStorage(project.name, project?);
+        saveDataToLocalStorage(project?.name,project);
+    } else {
+        console.error(`Project "${projectName}" not found.`);
     }
   }
 
