@@ -8,18 +8,43 @@
     <title>To-Do App</title>
   </head>
   <body>
-    <div>
-      <form>
-        <input name="task" type="text" />
-        <input name="description" type="text" />
-        <input name="priority" type="number" />
-        <input name="dueDate" type="date" />
-        <input id="toDoBttn" type="button" value="Add To-Do Item" />
-      </form>
-    </div>
+    <div></div>
     <div id="container">
-      <!-- To be filled with JS DOM manipulation. -->
-      <ul class="toDoList"></ul>
+      <section>
+        <h2>Create Project</h2>
+        <input id="projectName" type="text" placeholder="Project Name" />
+        <button id="createProject">Create Project</button>
+      </section>
+      <section>
+        <h2>Create To-Do Item</h2>
+        <form>
+          <label for="projectSelection">Select Project:</label>
+          <select id="projectSelection"></select>
+
+          <label for="task">Title: </label>
+          <input name="task" type="text" placeholder="Title" required />
+
+          <label for="description">Description: </label>
+          <input name="description" type="text" placeholder="Description" />
+
+          <label for="priority">Priority: </label>
+          <input
+            name="priority"
+            type="number"
+            placeholder="Priority 1-9"
+            min="1"
+            max="9"
+          />
+
+          <label for="dueDate">Due Date: </label>
+          <input name="dueDate" type="date" placeholder="Select the due date" />
+
+          <input id="toDoBttn" type="button" value="Add To-Do Item" />
+        </form>
+      </section>
+      <div id="projectList">
+        <ul class="toDoList"></ul>
+      </div>
     </div>
   </body>
   <script src="index.js"></script>
