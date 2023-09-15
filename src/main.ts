@@ -2,15 +2,19 @@ import './style.css';
 import { createToDoItem } from './toDoFactoryFunc';
 import { addToDoItemToUI } from './addToDoItemToUI';
 import { populateProjectDropdown,createProject,addToDoItemToProject } from './projectFunctions';
+import { getDataFromLocalStorage, saveDataToLocalStorage } from './localStorageFunctions';
 
 // This will be written in typescript from now on.
 // Strongly Typed is the only thing I know for now.
 
 //Make sure the DOM is loaded before any JS happens
 document.addEventListener("DOMContentLoaded", function () {
+
+  //Initialise the projects from the local storage
+  const projects = getDataFromLocalStorage();
   
-  //Declare variables from the form inputs
-  //const form = document.querySelector('form') as HTMLFormElement;
+  //Declare variables from the form inputs and buttons
+  
   const taskInput = document.querySelector('input[name="task"]') as HTMLInputElement;
   const descriptionInput = document.querySelector('input[name="description"]') as HTMLInputElement;
   const priorityInput = document.querySelector('input[name="priority"]')as HTMLInputElement;

@@ -1,4 +1,5 @@
 import { ToDoItem } from "./toDoFactoryFunc";
+import { saveDataToLocalStorage, getDataFromLocalStorage } from "./localStorageFunctions";
 
 // Define a type for the Project Object
 type Project = {
@@ -14,6 +15,7 @@ type Project = {
       toDoItems: [],
     };
     projects.push(project);
+    saveDataToLocalStorage(project.name,project)
   }
 
   function populateProjectDropdown(){
@@ -32,7 +34,8 @@ type Project = {
     const project = projects.find((p)=> p.name === projectName)
     if(projectName){
         project?.toDoItems.push(toDoItem)
+        saveDataToLocalStorage(project.name, project?);
     }
   }
 
-  export {addToDoItemToProject, createProject, populateProjectDropdown}
+  export {addToDoItemToProject, createProject, populateProjectDropdown, Project}
