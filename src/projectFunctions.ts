@@ -22,11 +22,17 @@ type Project = {
     const projectSelection = document.getElementById('projectSelection') as HTMLSelectElement;
     projectSelection.innerHTML = '';
 
+    for(let i = 0; i < localStorage.length; i++){
+      const option = document.createElement('option')
+      const key = localStorage.key(i) as string;
+      option.value = key
+      option.text = key
+      projectSelection.appendChild(option);
+      
+  }
+
     for(const project of projects){
-        const option = document.createElement('option')
-        option.value = project.name
-        option.text = project.name
-        projectSelection.appendChild(option);
+        
     }
   }
 

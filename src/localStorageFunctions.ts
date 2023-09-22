@@ -12,9 +12,20 @@ function saveDataToLocalStorage(name: string | undefined, data: ProjectData | un
     }
 }
 
-function getDataFromLocalStorage(){
-    const storedData = localStorage.getItem('projects');
-    return storedData ? JSON.parse(storedData) : [];
+function getProjectNamesFromLocalStorage() {
+    const keys = [];
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i) as string;
+        keys.push(key);
+    }
+
+    return keys;
 }
 
-export { saveDataToLocalStorage, getDataFromLocalStorage }
+function getProjectDataFromLocalStorage(name:string) {
+    const projectData = localStorage.getItem(name);
+    return projectData ? JSON.parse(projectData) : null;
+  }
+
+export { saveDataToLocalStorage, getProjectNamesFromLocalStorage, getProjectDataFromLocalStorage }
