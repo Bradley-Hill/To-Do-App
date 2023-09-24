@@ -12,6 +12,10 @@ function saveDataToLocalStorage(name: string | undefined, data: ProjectData | un
     }
 }
 
+function saveProjectDataToLocalStorage(project: Project) {
+    localStorage.setItem(project.name, JSON.stringify(project));
+  }
+
 function getProjectNamesFromLocalStorage() {
     const keys = [];
 
@@ -28,4 +32,4 @@ function getProjectDataFromLocalStorage(name:string) {
     return projectData ? JSON.parse(projectData) : null;
   }
 
-export { saveDataToLocalStorage, getProjectNamesFromLocalStorage, getProjectDataFromLocalStorage }
+export { saveDataToLocalStorage, getProjectNamesFromLocalStorage, getProjectDataFromLocalStorage, saveProjectDataToLocalStorage }

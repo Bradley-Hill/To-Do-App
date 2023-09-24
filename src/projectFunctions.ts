@@ -1,5 +1,5 @@
 import { ToDoItem } from "./toDoFactoryFunc";
-import { saveDataToLocalStorage,  } from "./localStorageFunctions";
+import { saveDataToLocalStorage, saveProjectDataToLocalStorage, } from "./localStorageFunctions";
 
 // Define a type for the Project Object
 type Project = {
@@ -28,19 +28,18 @@ type Project = {
       option.value = key
       option.text = key
       projectSelection.appendChild(option);
-      
   }
-
-    for(const project of projects){
-        
-    }
   }
 
   function addToDoItemToProject(projectName: string, toDoItem: ToDoItem){
+
+    console.log(`Adding ToDoItem to project: ${projectName}`);
+    console.log("Current projects:", projects);
+
     const project = projects.find((p)=> p.name === projectName)
-    if(projectName){
-        project?.toDoItems.push(toDoItem)
-        saveDataToLocalStorage(project?.name,project);
+    if(project){
+        project.toDoItems.push(toDoItem)
+        saveProjectDataToLocalStorage(project);
     } else {
         console.error(`Project "${projectName}" not found.`);
     }

@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   //Initialise the projects from the local storage
   const projectNames = getProjectNamesFromLocalStorage();
   const projects: Project[] = projectNames.map(name => getProjectDataFromLocalStorage(name));
+
+  console.log("Initialized projects:", projects);
   
   //Declare variables from the form inputs and buttons
   
