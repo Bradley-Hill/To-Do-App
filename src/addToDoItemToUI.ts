@@ -1,19 +1,21 @@
 import { ToDoItem } from "./toDoFactoryFunc";
 
-function addToDoItemToUI(toDoItem: ToDoItem){
-    const ul = document.querySelector('ul')
-  
-    const li = document.createElement('li');
+function addToDoItemToUI(toDoItem: ToDoItem) {
+  const ul = document.querySelector('ul');
 
-    li.innerHTML = `
-    <strong>Task:</strong> ${toDoItem.task}<br>
-    <strong>Description:</strong> ${toDoItem.description}<br>
-    <strong>Priority:</strong> ${toDoItem.priority}<br>
-    <strong>Due Date:</strong> ${toDoItem.dueDate}<br>
-    <strong>Is Completed:</strong> ${toDoItem.isCompleted ? 'Yes' : 'No'}
-    `
+  const li = document.createElement('li');
+  li.innerHTML = generateToDoItemHTML(toDoItem);
+  ul?.appendChild(li);
+}
 
-    ul?.appendChild(li);
-  }
+  function generateToDoItemHTML(item: ToDoItem) {
+    return `
+        <strong>Task:</strong> ${item.task}<br>
+        <strong>Description:</strong> ${item.description}<br>
+        <strong>Priority:</strong> ${item.priority}<br>
+        <strong>Due Date:</strong> ${item.dueDate}<br>
+        <strong>Is Completed:</strong> ${item.isCompleted ? 'Yes' : 'No'}
+    `;
+}
 
-  export {addToDoItemToUI}
+  export {addToDoItemToUI, generateToDoItemHTML}

@@ -1,6 +1,6 @@
 import './style.css';
 import { createToDoItem, ToDoItem } from './toDoFactoryFunc';
-import { addToDoItemToUI } from './addToDoItemToUI';
+import { addToDoItemToUI, generateToDoItemHTML } from './addToDoItemToUI';
 import { populateProjectDropdown,createProject,addToDoItemToProject, Project } from './projectFunctions';
 import { getProjectNamesFromLocalStorage,getProjectDataFromLocalStorage } from './localStorageFunctions';
 
@@ -61,22 +61,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   projectSelection.addEventListener('change', function () {
     const selectedProjectName = projectSelection.value;
-  
-    if (selectedProjectName) {
-      const selectedProject = projects.find((project: Project) => project.name === selectedProjectName);
-      if (selectedProject && toDoList) {
-        toDoList.innerHTML = "";
-        selectedProject.toDoItems.forEach((item: ToDoItem) => {
-          const listItem = document.createElement('li');
-  
-          listItem.textContent = JSON.stringify(item);
-  
 
-          toDoList.appendChild(listItem);
-        });
-      }
+    if (selectedProjectName) {
+        const selectedProject = projects.find((project) => project.name === selectedProjectName);
+        if (selectedProject && toDoList) {
+            toDoList.innerHTML = '';
+            selectedProject.toDoItems.forEach((item) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = generateToDoItemHTML(item);
+                toDoList.appendChild(listItem);
+            });
+        }
     }
-  });
+});
   
   populateProjectDropdown();
 
