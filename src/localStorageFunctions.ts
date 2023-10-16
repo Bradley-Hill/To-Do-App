@@ -1,21 +1,20 @@
 import { Project } from "./projectFunctions";
 
-
-//Local Storage set/get functions for persistent projects between users.
-
 type ProjectData = Project;
 
-
-function saveDataToLocalStorage(name: string | undefined, data: ProjectData | undefined) {
-    if (name !== undefined && data !== undefined) {
+//stores new project in local storage
+function saveNewProjectToLocalStorage(name: string|undefined, data: ProjectData|undefined){
+    if (name !== undefined && data !== undefined){
         localStorage.setItem(name, JSON.stringify(data));
     }
 }
 
+//stores updated project in local storage
 function saveProjectDataToLocalStorage(project: Project) {
     localStorage.setItem(project.name, JSON.stringify(project));
   }
 
+//get Project names from local storage(for populating dropdown selector)
 function getProjectNamesFromLocalStorage() {
     const keys = [];
 
@@ -27,9 +26,10 @@ function getProjectNamesFromLocalStorage() {
     return keys;
 }
 
+// retrieves a project by key/namre from local storage
 function getProjectDataFromLocalStorage(name:string) {
     const projectData = localStorage.getItem(name);
     return projectData ? JSON.parse(projectData) : null;
   }
 
-export { saveDataToLocalStorage, getProjectNamesFromLocalStorage, getProjectDataFromLocalStorage, saveProjectDataToLocalStorage }
+export { saveNewProjectToLocalStorage,saveProjectDataToLocalStorage,getProjectDataFromLocalStorage, getProjectNamesFromLocalStorage }

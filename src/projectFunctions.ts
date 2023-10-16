@@ -1,41 +1,37 @@
-import { ToDoItem } from "./toDoFactoryFunc";
-import { saveDataToLocalStorage, saveProjectDataToLocalStorage, } from "./localStorageFunctions";
+import { ToDoItem} from "./toDoFactoryFunction";
+import { projects } from "./main";
+import { saveNewProjectToLocalStorage, saveProjectDataToLocalStorage } from "./localStorageFunctions";
 
-// Define a type for the Project Object
+// Define the type for the project object
 type Project = {
-    name: string;
+    name:string;
     toDoItems: ToDoItem[];
-  }
-  
-  const projects: Project[] = [];
-  
-  function createProject(name: string){
-    const project: Project = {
-      name: name,
-      toDoItems: [],
-    };
-    projects.push(project);
-    saveDataToLocalStorage(project.name,project)
-  }
+}
 
-  function populateProjectDropdown(){
+// Creates a project to be stored in local storage
+function createProject(name: string){
+    const project: Project = {
+        name:name,
+        toDoItems: []
+    };
+    saveNewProjectToLocalStorage(project.name,project)
+}
+
+// Adds the keys from local storage to dropdown
+function populateProjectDropdown(){
     const projectSelection = document.getElementById('projectSelection') as HTMLSelectElement;
-    projectSelection.innerHTML = '';
+    projectSelection.innerHTML = "";
 
     for(let i = 0; i < localStorage.length; i++){
-      const option = document.createElement('option')
-      const key = localStorage.key(i) as string;
-      option.value = key
-      option.text = key
-      projectSelection.appendChild(option);
-  }
-  }
+        const option = document.createElement('option')
+        const key = localStorage.key(i) as string;
+        option.value = key
+        option.text = key
+        projectSelection.appendChild(option);
+    }
+}
 
-  function addToDoItemToProject(projectName: string, toDoItem: ToDoItem){
-
-    console.log(`Adding ToDoItem to project: ${projectName}`);
-    console.log("Current projects:", projects);
-
+function addToDoItemToProject(projectName: string, toDoItem: ToDoItem){
     const project = projects.find((p)=> p.name === projectName)
     if(project){
         project.toDoItems.push(toDoItem)
@@ -43,6 +39,6 @@ type Project = {
     } else {
         console.error(`Project "${projectName}" not found.`);
     }
-  }
+}
 
-  export {addToDoItemToProject, createProject, populateProjectDropdown, Project}
+export { Project, createProject, populateProjectDropdown, addToDoItemToProject }

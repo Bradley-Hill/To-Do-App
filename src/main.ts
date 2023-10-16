@@ -1,40 +1,62 @@
-import './style.css';
-import { createToDoItem, ToDoItem } from './toDoFactoryFunc';
-import { addToDoItemToUI, generateToDoItemHTML } from './addToDoItemToUI';
-import { populateProjectDropdown,createProject,addToDoItemToProject, Project } from './projectFunctions';
-import { getProjectNamesFromLocalStorage,getProjectDataFromLocalStorage } from './localStorageFunctions';
+import "./style.css";
+import {
+  Project,
+  createProject,
+  populateProjectDropdown,
+  addToDoItemToProject
+} from "./projectFunctions";
+import {
+  getProjectNamesFromLocalStorage,
+  getProjectDataFromLocalStorage,
+} from "./localStorageFunctions";
+import { createToDoItem,  } from "./toDoFactoryFunction";
+import {addToDoItemToUI, generateToDoItemHTML} from "./addToDoItemsToUI"
 
-// This will be written in typescript from now on.
-// Strongly Typed is the only thing I know for now.
+//This is attempt number 2 at writing a typescript ToDo App.
 
-//Make sure the DOM is loaded before any JS happens
+//Initialise the projects from local storage
+const projectNames = getProjectNamesFromLocalStorage();
+const projects: Project[] = projectNames.map((name) =>
+  getProjectDataFromLocalStorage(name)
+);
+
+console.log("ProjectNames: ",projectNames)
+console.log("projects: ", projects)
+
+//Make sure the DOM is fully loaded before JS is executed
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("Initialised projects: ", projects);
 
-  //Initialise the projects from the local storage
-  const projectNames = getProjectNamesFromLocalStorage();
-  const projects: Project[] = projectNames.map(name => getProjectDataFromLocalStorage(name));
+  //declare variables from the form inputs and buttons
+  const taskInput = document.querySelector(
+    'input[name="task"]'
+  ) as HTMLInputElement;
+  const descriptionInput = document.querySelector(
+    'input[name="description"]'
+  ) as HTMLInputElement;
+  const priorityInput = document.querySelector(
+    'input[name="priority"]'
+  ) as HTMLInputElement;
+  const dueDateInput = document.querySelector(
+    'input[name="dueDate"]'
+  ) as HTMLInputElement;
+  const toDoButton = document.querySelector("#toDoBttn");
+  const createProjectButton = document.getElementById("createProject");
+  const projectSelection = document.getElementById(
+    "projectSelection"
+  ) as HTMLSelectElement;
+  const toDoList = document.querySelector(".toDoList");
 
-  console.log("Initialized projects:", projects);
-  
-  //Declare variables from the form inputs and buttons
-  
-  const taskInput = document.querySelector('input[name="task"]') as HTMLInputElement;
-  const descriptionInput = document.querySelector('input[name="description"]') as HTMLInputElement;
-  const priorityInput = document.querySelector('input[name="priority"]')as HTMLInputElement;
-  const dueDateInput = document.querySelector('input[name="dueDate"]')as HTMLInputElement;
-  const toDoButton = document.querySelector('#toDoBttn')
-  const createProjectButton = document.getElementById('createProject');
-  const projectSelection = document.getElementById('projectSelection') as HTMLSelectElement;
-  const toDoList = document.querySelector('.toDoList')
-
-  //Listen for Project button being clicked and create a project and add it to the dropdown selector
-  createProjectButton?.addEventListener('click', function () {
-    const projectNameInput = document.getElementById('projectName') as HTMLInputElement;
+  // listen for project button being clicked and create a project and add it to dropdown selector
+  createProjectButton?.addEventListener("click", function () {
+    const projectNameInput = document.getElementById(
+      "projectName"
+    ) as HTMLInputElement;
     const projectName = projectNameInput.value.trim();
     if (projectName) {
       createProject(projectName);
       populateProjectDropdown();
-      projectNameInput.value = '';
+      projectNameInput.value = "";
     }
   });
 
@@ -57,10 +79,9 @@ document.addEventListener("DOMContentLoaded", function () {
     addToDoItemToUI(toDoItem);
   });
 
-  //Listen for changes in dropdown selector and display the linked toDoList with selected
-
-  projectSelection.addEventListener('change', function () {
-    const selectedProjectName = projectSelection.value;
+  //Listen for changes in dropdown selector and display the project on page
+  projectSelection.addEventListener('change', function(){
+    const selectedProjectName = projectSelection.value
 
     if (selectedProjectName) {
         const selectedProject = projects.find((project) => project.name === selectedProjectName);
@@ -73,8 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
-});
-  
-  populateProjectDropdown();
+  })
 
+  populateProjectDropdown();
 });
+
+export { projects };
